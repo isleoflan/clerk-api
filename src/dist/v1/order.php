@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use IOL\Dashboard\v1\BitMasks\RequestMethod;
-use IOL\Dashboard\v1\Request\APIResponse;
+use IOL\Generic\v1\BitMasks\RequestMethod;
+use IOL\Generic\v1\Request\APIResponse;
 
 $response = APIResponse::getInstance();
 
@@ -26,4 +26,22 @@ $input = $response->getRequestData([
         'errorCode' => 701202,
     ],
 ]);
+
+if (count($input['products']) <= 0) {
+    $response->addError(701202)->render();
+}
+$input['badgeId'] = str_replace([' ', '-', ':'], '', $input['badgeId']);
+if (!ctype_xdigit($input['badgeId'])) {
+    $response->addError(701201)->render();
+}
+
+$order = new \IOL\Clerk\v1\Entity\ClerkOrder();
+$balance = $order->createNew(
+    $order->getUserFromBadge($input['badgeId']),
+    $input['products'],
+    $userId
+);
+
+$response->addData('balance', $balance);
+$response->setResponseCode(201);
 
