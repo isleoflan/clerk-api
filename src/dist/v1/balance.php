@@ -20,4 +20,11 @@ $input = $response->getRequestData([
         'errorCode' => 701101,
     ],
 ]);
+$input['badgeId'] = str_replace([' ', '-', ':'], '', $input['badgeId']);
+if (!ctype_xdigit($input['badgeId'])) {
+    $response->addError(701201)->render();
+}
+
+$order = new \IOL\Clerk\v1\Entity\ClerkOrder();
+$response->addData('balance', $order->getCardBalance($order->getUserFromBadge($input['badgeId'])));
 
