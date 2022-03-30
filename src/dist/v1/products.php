@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use IOL\Dashboard\v1\BitMasks\RequestMethod;
-use IOL\Dashboard\v1\Request\APIResponse;
+use IOL\Generic\v1\BitMasks\RequestMethod;
+use IOL\Generic\v1\Request\APIResponse;
 
 $response = APIResponse::getInstance();
 
