@@ -1,0 +1,20 @@
+{
+  "name": "isleoflan/clerk-api",
+  "description": "description",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "stui",
+      "email": "stui@isleoflan.ch"
+    }
+  ],
+
+  "require": {
+    "isleoflan/generic-classes": "*",
+    "stui/statuspage-io": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}
