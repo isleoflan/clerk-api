@@ -150,7 +150,7 @@ class ClerkOrder
         $database = Database::getInstance();
         $result = $database->query('SELECT SUM(value)*-1 AS balance FROM transactions WHERE user_id = "'.$userId.'"');
 
-        return $result[0]['balance'] ?? 0;
+        return (int)$result[0]['balance'];
     }
 
     public function getUserFromBadge(string $badgeId): ?string
