@@ -2,7 +2,7 @@
 
     declare(strict_types=1);
 
-    use IOL\Dashboard\v1\Request\APIResponse;
+    use IOL\Generic\v1\Request\APIResponse;
 
     $basePath = __DIR__;
     foreach (['/vendor/autoload.php'] as $file)
