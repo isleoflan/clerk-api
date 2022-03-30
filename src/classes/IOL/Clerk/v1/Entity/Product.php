@@ -89,6 +89,18 @@
             }
             return $return;
         }
+
+        public function getFirstImage(): string
+        {
+            $images = $this->getImages();
+            if(count($images) > 0) {
+                /** @var ProductMedium $image */
+                $image = array_unshift($images);
+                return $image->getUrl();
+            }
+            return '';
+        }
+
         /**
          * @return string
          */
@@ -161,7 +173,7 @@
             return $this->category;
         }
 
-        #[ArrayShape(['id' => "string", 'name' => "string", 'price' => "int", 'category' => "string", 'categoryId' => "int"])]
+        #[ArrayShape(['id' => "string", 'name' => "string", 'price' => "int", 'category' => "string", 'categoryId' => "int", 'image' => "string"])]
         #[Pure]
         public function serialize(): array
         {
@@ -170,7 +182,8 @@
                 'name' => $this->title,
                 'price' => $this->price,
                 'category' => $this->category->getTitle(),
-                'categoryId' => $this->category->getId()
+                'categoryId' => $this->category->getId(),
+                'image' => $this->getFirstImage()
             ];
         }
 
@@ -179,6 +192,7 @@
         {
             $database = Database::getInstance();
             $database->where('category_id', [2,6,7,8,9], 'IN');
+            $database->orderBy('sort', 'ASC');
 
             $return = [];
 
