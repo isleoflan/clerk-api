@@ -100,7 +100,7 @@ class ClerkOrder
         $topupId = '4c0cf233-4987-48fa-8282-65098bff4c3d';
 
         $realProducts = [];
-        foreach($this->items as $item){
+        foreach($this->items as $key => $item){
             /** @var ClerkOrderItem $item */
             if ($item->getProduct()->getId() === $topupId) {
                 $database->insert('transactions', [
@@ -111,6 +111,13 @@ class ClerkOrder
                 ]);
             } else {
                 $realProducts[] = $item;
+                $database->insert('clerk_order_items', [
+                    'id' => UUID::newId('clerk_order_items'),
+                    'order_id' => $this->id,
+                    'product_id' => $item->getProduct()->getId(),
+                    'amount' => $item->getPrice(),
+                    'sort' => $key,
+                ]);
             }
         }
 
