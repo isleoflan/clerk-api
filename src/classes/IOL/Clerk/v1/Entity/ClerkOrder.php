@@ -115,7 +115,7 @@ class ClerkOrder
                     'id' => UUID::newId('clerk_order_items'),
                     'order_id' => $this->id,
                     'product_id' => $item->getProduct()->getId(),
-                    'amount' => $item->getPrice(),
+                    'amount' => $item->getAmount(),
                     'sort' => $key,
                 ]);
             }
