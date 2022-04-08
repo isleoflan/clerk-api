@@ -92,6 +92,7 @@
 
         public function getFirstImage(): string
         {
+            return '';
             $images = $this->getImages();
             if(count($images) > 0) {
                 /** @var ProductMedium $image */
