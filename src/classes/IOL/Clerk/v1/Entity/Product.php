@@ -191,7 +191,7 @@
         public static function getAllClerkProducts() : array
         {
             $database = Database::getInstance();
-            $database->where('category_id', [2,6,7,8,9], 'IN');
+            $database->where('category_id', [2,4,6,7,8,9], 'IN');
             $database->orderBy('sort', 'ASC');
 
             $return = [];
